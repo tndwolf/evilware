@@ -1,0 +1,104 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Skills/rm.gd" type="Script" id=1]
+[ext_resource path="res://Skills/delete.gd" type="Script" id=2]
+[ext_resource path="res://Skills/kill.gd" type="Script" id=3]
+[ext_resource path="res://Skills/killall.gd" type="Script" id=4]
+[ext_resource path="res://Skills/term.gd" type="Script" id=5]
+[ext_resource path="res://Skills/stop.gd" type="Script" id=6]
+[ext_resource path="res://Skills/defrag.gd" type="Script" id=7]
+[ext_resource path="res://Skills/ps.gd" type="Script" id=8]
+[ext_resource path="res://Skills/sleep.gd" type="Script" id=9]
+[ext_resource path="res://Skills/chmod.gd" type="Script" id=10]
+[ext_resource path="res://Skills/mv.gd" type="Script" id=11]
+[ext_resource path="res://Skills/patch.gd" type="Script" id=12]
+[ext_resource path="res://Skills/test.gd" type="Script" id=13]
+[ext_resource path="res://Skills/composition.gd" type="Script" id=14]
+[ext_resource path="res://Skills/fork.gd" type="Script" id=15]
+
+[node name="Skills" type="Node"]
+
+[node name="chmod" type="Node" parent="."]
+script = ExtResource( 10 )
+category = "Hacking"
+cost = 48
+description = "Removes all resistances from a target."
+
+[node name="composition" type="Node" parent="."]
+script = ExtResource( 14 )
+description = "Increase Integrity."
+
+[node name="defrag" type="Node" parent="."]
+script = ExtResource( 7 )
+category = "Hacking"
+cost = 32
+description = "Lowers the corruption in a 5x5 area by two levels."
+
+[node name="delete" type="Node" parent="."]
+script = ExtResource( 2 )
+category = "Cracking"
+cost = 32
+description = "Removes a threat from memory. Does medium integrity damage."
+overrides = "rm"
+
+[node name="fork" type="Node" parent="."]
+script = ExtResource( 15 )
+category = "Hacking"
+cost = 48
+description = "Creates a dummy that will distract all enemies in range.."
+
+[node name="kill" type="Node" parent="."]
+script = ExtResource( 3 )
+category = "Cracking"
+cost = 64
+description = "Attempts to kill a process. Does high integrity damage."
+overrides = "delete"
+
+[node name="killall" type="Node" parent="."]
+script = ExtResource( 4 )
+category = "Cracking"
+cost = 64
+description = "Does medium integrity damage to all close targets."
+
+[node name="mv" type="Node" parent="."]
+script = ExtResource( 11 )
+category = "Hacking"
+cost = 32
+description = "Teleport to target."
+
+[node name="ps" type="Node" parent="."]
+script = ExtResource( 8 )
+category = "Hacking"
+cost = 32
+description = "Weakens all targets in a 5x5 area."
+
+[node name="patch" type="Node" parent="."]
+script = ExtResource( 12 )
+description = "Increase Security."
+
+[node name="sleep" type="Node" parent="."]
+script = ExtResource( 9 )
+category = "Hacking"
+cost = 32
+description = "Stuns target."
+
+[node name="rm" type="Node" parent="."]
+script = ExtResource( 1 )
+category = "Cracking"
+description = "Attempts to remove a file. Does low integrity damage."
+
+[node name="stop" type="Node" parent="."]
+script = ExtResource( 6 )
+category = "Cracking"
+cost = 48
+description = "Does moderate integrity damage. Stuns target."
+
+[node name="term" type="Node" parent="."]
+script = ExtResource( 5 )
+category = "Cracking"
+cost = 48
+description = "Does moderate integrity damage. Weakens target."
+
+[node name="test" type="Node" parent="."]
+script = ExtResource( 13 )
+description = "Increase Robustness."
