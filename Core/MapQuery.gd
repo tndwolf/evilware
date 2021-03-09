@@ -36,11 +36,23 @@ func clear() -> MapQuery:
 	return self
 
 
-func collect() -> Array:
-	return _cells
+func collect(only_free:bool=false) -> Array:
+	if only_free:
+		var res = []
+		for cell in _cells:
+			if _is_valid(cell):
+				res.append(cell)
+		return res
+	else:
+		return _cells
 
 
-func first() -> Cell:
+func first(only_free:bool=false) -> Cell:
+	for cell in _cells:
+		if only_free and _is_valid(cell):
+			return cell
+		else:
+			return cell
 	return null if len(_cells) == 0 else _cells[0]
 
 
@@ -83,6 +95,17 @@ func _random() -> Cell:
 		randi() % map.width(),
 		randi() % map.height()
 	))
+
+
+func random(only_free:bool=false) -> Cell:
+	_cells.shuffle()
+	if !only_free:
+		return null if len(_cells) == 0 else _cells[0]
+	else:
+		for cell in _cells:
+			if _is_valid(cell):
+				return cell
+	return null
 
 
 func random_empty(how_many:int=1) -> MapQuery:

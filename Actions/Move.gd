@@ -10,7 +10,7 @@ func attempt(actor:Entity, params:Dictionary) -> bool:
 		params['target'] = target
 		if target.is_character() and target.faction != actor.faction:
 			return GM.try_action('Crack', actor, params)
-		elif target.is_character():
+		elif target.is_character() and target.faction != Entity.Faction.ENEMY:
 			return GM.try_action('Talk', actor, params)
 		elif actor == GM.player:
 			return GM.try_action('Use', actor, params)

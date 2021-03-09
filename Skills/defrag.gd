@@ -11,5 +11,13 @@ func on_purchased(entity:Entity):
 
 func on_used(actor:Entity, area:MapQuery):
 	for cell in area.collect():
-		if cell.corruption > 0:
-			cell.corruption -= 2 
+		cell.corruption_resist = 3
+		match cell.corruption:
+			Cell.Corruption.LOW:
+				cell.corruption = Cell.Corruption.NONE
+			Cell.Corruption.MEDIUM:
+				cell.corruption = Cell.Corruption.NONE
+			Cell.Corruption.HIGH:
+				cell.corruption = Cell.Corruption.LOW
+#		if cell.corruption > 0:
+#			cell.corruption -= 2 

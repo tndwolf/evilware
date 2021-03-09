@@ -17,17 +17,18 @@ enum Type {
 	WALL
 }
 
-const CORRUPTION_COLOR = [
-	Color.blue,
-	Color.lightgreen,
-	Color.goldenrod,
-	Color.lightcoral
+var CORRUPTION_COLOR = [
+	Config.COLOR_NO_CORRUPTION,
+	Config.COLOR_LOW_CORRUPTION,
+	Config.COLOR_MED_CORRUPTION,
+	Config.COLOR_HIGH_CORRUPTION
 ]
 
 
 var cell_type = Type.INVALID setget set_cell_type, get_cell_type
 var _color_shift = randf() * 0.2
 var corruption = Corruption.NONE setget set_corruption, get_corruption
+var corruption_resist = 0
 var _entities = []
 var grid_position = -Vector2.ONE setget set_grid_position, get_grid_position
 var in_los = false setget set_in_los, get_in_los
@@ -82,9 +83,10 @@ func _get_visible_color() -> Color:
 
 
 func hide():
+#	return
 	_tween.stop_all()
 	var start = modulate
-	var end = Color(start.r, start.g, start.b, 0.0)
+	var end = _get_visible_color() * Color(1, 1, 1, 0.25)
 	_tween.interpolate_property(self, 'modulate', start, end, Config.MOVE_DURATION/4)
 	_tween.start()
 	for entity in _entities:
@@ -111,6 +113,7 @@ func move_out(entity:Node):
 func set_cell_type(value:int):
 	if cell_type != value:
 		cell_type = value
+		$Sprite.scale = Vector2.ONE
 		match value:
 			Type.ABYSS:
 				z_index = -10
@@ -124,16 +127,17 @@ func set_cell_type(value:int):
 			Type.WALL:
 				z_index = 0
 				$Sprite.frame = randi() % 4
+				$Sprite.scale = Vector2(1.125, 1.0)
 
 
 func set_corruption(value:int):
 	if corruption != value:
-		corruption = value
-		if in_los:
-			show()
-#		match value:
-#			Corruption.LOW:
-#				modulate = Color.lightgreen
+		if value > corruption and corruption_resist > 0:
+			corruption_resist -= 1
+		else:
+			corruption = value
+			if in_los:
+				show()
 
 
 func set_grid_position(value:Vector2):

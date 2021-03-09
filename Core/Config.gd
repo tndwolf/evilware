@@ -9,6 +9,14 @@ const MODERATE_DAMAGE = 8
 const MOVE_DURATION = 0.4
 
 
+const COLOR_FRIENDLY = Color('CFECFF')
+const COLOR_HIGH_CORRUPTION = Color('FA8072')
+const COLOR_LOW_CORRUPTION = Color('98FB98')
+const COLOR_MED_CORRUPTION = Color('FFEE66')
+const COLOR_NO_CORRUPTION = Color('87CEFA')
+const COLOR_THREATS = Color('FFA07A')
+
+
 var levels = {
 	'/home': {
 		'default_cell_type': Cell.Type.WALL,
@@ -44,6 +52,11 @@ var levels = {
 
 
 var templates = {
+	'adware': {
+		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
+		'res': preload("res://Entitites/Threats/Adware.tscn"),
+		'traits': ['Annoy', 'Teleport']
+	},
 	'bug': {
 		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
 		'res': preload("res://Entitites/Threats/Bug.tscn"),

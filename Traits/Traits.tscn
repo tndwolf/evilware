@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Traits/Bug.gd" type="Script" id=1]
 [ext_resource path="res://Traits/Corruption1.gd" type="Script" id=2]
 [ext_resource path="res://Traits/Player.gd" type="Script" id=3]
+[ext_resource path="res://Traits/Annoy.gd" type="Script" id=4]
+[ext_resource path="res://Traits/Teleport.gd" type="Script" id=5]
 
 [node name="Traits" type="Node"]
+
+[node name="Annoy" type="Node" parent="."]
+script = ExtResource( 4 )
 
 [node name="Bug" type="Node" parent="."]
 script = ExtResource( 1 )
@@ -14,3 +19,6 @@ script = ExtResource( 2 )
 
 [node name="Player" type="Node" parent="."]
 script = ExtResource( 3 )
+
+[node name="Teleport" type="Node" parent="."]
+script = ExtResource( 5 )

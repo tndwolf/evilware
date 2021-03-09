@@ -54,9 +54,12 @@ func clear() -> Node:
 func damage(actor:Entity, target:Entity, value:int, skill:Skill, params:Dictionary={}) -> Dictionary:
 	print('dealing %d damage to %s' % [value, target])
 	if value > 0:
-		target.integrity -= value
-		if skill != null:
-			skill.on_damage(actor, target, params)
+		for t in target._traits:
+			value = get_trait(t).on_damage(actor, target, value, skill, params)
+		if value > 0:
+			target.integrity -= value
+			if skill != null:
+				skill.on_damage(actor, target, params)
 	return params
 
 
@@ -85,7 +88,7 @@ func get_skills(category:String='') -> Array:
 
 func get_trait(trait_id:String) -> Trait:
 	var res = _traits.get_node(trait_id)
-	return res if res else Trait.new()
+	return res if res else null
 
 
 func get_world() -> Node:
@@ -170,12 +173,12 @@ func stop():
 	state = State.PAUSE
 
 
-func teleport(entity:Entity, coords:Vector2):
+func teleport(entity:Entity, coords:Vector2, animate:bool=false):
 	var old_cell = Map.at(entity.grid_position)
 	var cell = Map.at(coords)
 	if cell != Map.INVALID_CELL:
 		if old_cell != Map.INVALID_CELL:
-			cell.move_out(entity)
+			old_cell.move_out(entity)
 		entity.grid_position = coords
 		cell.move_in(entity)
 

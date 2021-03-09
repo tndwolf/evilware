@@ -16,11 +16,11 @@ polygon = PoolVector2Array( -16, -16, 16, -16, 16, 16, -16, 16, -16, -8 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -14 )
+position = Vector2( 0, -16 )
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 4
-frame = 5
+frame = 3
 
 [node name="Area2D" type="Area2D" parent="."]
 monitoring = false
