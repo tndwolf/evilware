@@ -5,6 +5,7 @@ class_name Skill
 export(String, 'Cracking', 'Hacking', 'Refactoring') var category = 'Refactoring'
 export(int, 16, 256, 16) var cost = 16
 export(String, MULTILINE) var description = 'Description'
+export(int) var icon_frame = 48
 export(String) var overrides = ''
 
 

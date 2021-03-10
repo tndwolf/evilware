@@ -1,4 +1,4 @@
-extends Node2D
+extends Sprite
 class_name Entity
 
 
@@ -30,9 +30,11 @@ func animate_attack(target:Entity) -> Tween:
 	var end = (position + target.position) / 2.0
 	var dx = end.x - start.x
 	if dx > 0:
-		scale = Vector2.ONE
+		flip_h = false
+#		scale = Vector2(-1.0, 1.0)
 	elif dx < 0:
-		scale = Vector2(-1.0, 1.0)
+		flip_h = true
+#		scale = Vector2(-1.0, 1.0)
 	_tween.interpolate_property(self, 'position', start, end, Config.ATTACK_DURATION/2)
 	_tween.interpolate_property(self, 'position', end, start, Config.ATTACK_DURATION/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, Config.ATTACK_DURATION/2)
 	_tween.start()
@@ -46,9 +48,11 @@ func animate_move(by:Vector2) -> Tween:
 	_tween.interpolate_property(self, 'position', start, end, Config.MOVE_DURATION)
 	_tween.start()
 	if by.x > 0:
-		scale = Vector2.ONE
+		flip_h = false
+#		scale = Vector2.ONE
 	elif by.x < 0:
-		scale = Vector2(-1.0, 1.0)
+		flip_h = true
+#		scale = Vector2(-1.0, 1.0)
 	return _tween
 
 
@@ -100,7 +104,7 @@ func is_idle() -> bool:
 
 func run() -> bool:
 	if mind:
-		return mind.run()
+		return mind.run_or_skip()
 	else:
 		return true
 

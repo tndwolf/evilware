@@ -1,10 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Traits/Bug.gd" type="Script" id=1]
 [ext_resource path="res://Traits/Corruption1.gd" type="Script" id=2]
 [ext_resource path="res://Traits/Player.gd" type="Script" id=3]
 [ext_resource path="res://Traits/Annoy.gd" type="Script" id=4]
 [ext_resource path="res://Traits/Teleport.gd" type="Script" id=5]
+[ext_resource path="res://Traits/Corruption2.gd" type="Script" id=6]
+[ext_resource path="res://Traits/Corruption3.gd" type="Script" id=7]
+[ext_resource path="res://Traits/Worm.gd" type="Script" id=8]
+[ext_resource path="res://Traits/Corrupted.gd" type="Script" id=9]
+[ext_resource path="res://Traits/Infected.gd" type="Script" id=10]
+[ext_resource path="res://Traits/Stunned.gd" type="Script" id=11]
+[ext_resource path="res://Traits/Weakened.gd" type="Script" id=12]
 
 [node name="Traits" type="Node"]
 
@@ -14,11 +21,32 @@ script = ExtResource( 4 )
 [node name="Bug" type="Node" parent="."]
 script = ExtResource( 1 )
 
+[node name="Corrupted" type="Node" parent="."]
+script = ExtResource( 9 )
+
 [node name="Corruption1" type="Node" parent="."]
 script = ExtResource( 2 )
+
+[node name="Corruption2" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="Corruption3" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="Infected" type="Node" parent="."]
+script = ExtResource( 10 )
 
 [node name="Player" type="Node" parent="."]
 script = ExtResource( 3 )
 
+[node name="Stunned" type="Node" parent="."]
+script = ExtResource( 11 )
+
 [node name="Teleport" type="Node" parent="."]
 script = ExtResource( 5 )
+
+[node name="Weakened" type="Node" parent="."]
+script = ExtResource( 12 )
+
+[node name="Worm" type="Node" parent="."]
+script = ExtResource( 8 )

@@ -23,6 +23,7 @@ script = ExtResource( 10 )
 category = "Hacking"
 cost = 48
 description = "Removes all resistances from a target."
+icon_frame = 60
 
 [node name="composition" type="Node" parent="."]
 script = ExtResource( 14 )
@@ -33,12 +34,14 @@ script = ExtResource( 7 )
 category = "Hacking"
 cost = 32
 description = "Lowers the corruption in a 5x5 area by two levels."
+icon_frame = 59
 
 [node name="delete" type="Node" parent="."]
 script = ExtResource( 2 )
 category = "Cracking"
 cost = 32
 description = "Removes a threat from memory. Does medium integrity damage."
+icon_frame = 57
 overrides = "rm"
 
 [node name="fork" type="Node" parent="."]
@@ -46,12 +49,14 @@ script = ExtResource( 15 )
 category = "Hacking"
 cost = 48
 description = "Creates a dummy that will distract all enemies in range.."
+icon_frame = 54
 
 [node name="kill" type="Node" parent="."]
 script = ExtResource( 3 )
 category = "Cracking"
 cost = 64
 description = "Attempts to kill a process. Does high integrity damage."
+icon_frame = 58
 overrides = "delete"
 
 [node name="killall" type="Node" parent="."]
@@ -59,18 +64,21 @@ script = ExtResource( 4 )
 category = "Cracking"
 cost = 64
 description = "Does medium integrity damage to all close targets."
+icon_frame = 50
 
 [node name="mv" type="Node" parent="."]
 script = ExtResource( 11 )
 category = "Hacking"
 cost = 32
 description = "Teleport to target."
+icon_frame = 63
 
 [node name="ps" type="Node" parent="."]
 script = ExtResource( 8 )
 category = "Hacking"
 cost = 32
 description = "Weakens all targets in a 5x5 area."
+icon_frame = 52
 
 [node name="patch" type="Node" parent="."]
 script = ExtResource( 12 )
@@ -81,11 +89,13 @@ script = ExtResource( 9 )
 category = "Hacking"
 cost = 32
 description = "Stuns target."
+icon_frame = 61
 
 [node name="rm" type="Node" parent="."]
 script = ExtResource( 1 )
 category = "Cracking"
 description = "Attempts to remove a file. Does low integrity damage."
+icon_frame = 56
 
 [node name="stop" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -98,6 +108,7 @@ script = ExtResource( 5 )
 category = "Cracking"
 cost = 48
 description = "Does moderate integrity damage. Weakens target."
+icon_frame = 49
 
 [node name="test" type="Node" parent="."]
 script = ExtResource( 13 )

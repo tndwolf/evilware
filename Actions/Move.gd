@@ -8,12 +8,17 @@ func attempt(actor:Entity, params:Dictionary) -> bool:
 	var target = get_target(end_cell, actor)
 	if target:
 		params['target'] = target
-		if target.is_character() and target.faction != actor.faction:
-			return GM.try_action('Crack', actor, params)
-		elif target.is_character() and target.faction != Entity.Faction.ENEMY:
-			return GM.try_action('Talk', actor, params)
+		if target.is_character():
+			if actor.faction == Entity.Faction.PLAYER and actor != GM.player:
+				res = true
+			if target.faction != actor.faction:
+				return GM.try_action('Crack', actor, params)
+			elif target.faction == Entity.Faction.PLAYER and actor == GM.player:
+				return GM.try_action('Talk', actor, params)
 		elif actor == GM.player:
 			return GM.try_action('Use', actor, params)
+		else:
+			res = true
 	elif end_cell.is_walkable():
 		Map.at(actor.grid_position).move_out(actor)
 		actor.animate_move(direction)

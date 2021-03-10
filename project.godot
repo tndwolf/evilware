@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://World/Cell.gd"
 }, {
-"base": "Node2D",
+"base": "Sprite",
 "class": "Entity",
 "language": "GDScript",
 "path": "res://Entitites/Entity.gd"
@@ -78,6 +78,7 @@ Config="*res://Core/Config.gd"
 Audio="*res://Core/Audio.gd"
 Map="*res://Core/Map.gd"
 GM="*res://Core/GameMaster.gd"
+UI="*res://Ui/Ui.gd"
 
 [display]
 
@@ -87,6 +88,10 @@ window/size/test_width=1024
 window/size/test_height=600
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[gui]
+
+theme/custom="res://Ui/DefaultTheme.tres"
 
 [importer_defaults]
 

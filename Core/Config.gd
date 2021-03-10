@@ -62,19 +62,37 @@ var templates = {
 		'res': preload("res://Entitites/Threats/Bug.tscn"),
 		'traits': ['Bug', 'Corruption1']
 	},
+	'corrupted_file': {
+		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
+		'res': preload("res://Entitites/Threats/CorruptedFile.tscn"),
+		'traits': ['Corrupted']
+	},
 	'data': {
 		'meta': {'use_type': 'data', 'value': 8},
-		'res': preload("res://Entitites/Objects/Data.tscn")
+		'res': preload("res://Entitites/Objects/Data.tscn"),
+		'traits': []
 	},
 	'directory_pointer': {
 		'meta': {'use_type': 'cd', 'value': '/home'},
-		'res': preload("res://Entitites/Objects/DirPointer.tscn")
+		'res': preload("res://Entitites/Objects/DirPointer.tscn"),
+		'traits': []
+	},
+	'file': {
+		'faction': Entity.Faction.PLAYER,
+		'mind': preload("res://Entitites/Minds/NeutralMind.gd"),
+		'res': preload("res://Entitites/Objects/File.tscn"),
+		'traits': []
 	},
 	'fork': {
 		'faction': Entity.Faction.PLAYER,
 		'mind': preload("res://Entitites/Minds/Mind.gd"),
 		'res': preload("res://Entitites/Player/Player.tscn"),
 		'traits': ['Fork']
+	},
+	'infected_program': {
+		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
+		'res': preload("res://Entitites/Threats/InfectedProgram.tscn"),
+		'traits': ['Infected']
 	},
 	'player': {
 		'faction': Entity.Faction.PLAYER,
@@ -85,5 +103,36 @@ var templates = {
 	'pointer': {
 		'meta': {'use_type': 'pointer', 'value': null},
 		'res': preload("res://Entitites/Objects/Pointer.tscn")
+	},
+	'program': {
+		'faction': Entity.Faction.PLAYER,
+		'mind': preload("res://Entitites/Minds/NeutralMind.gd"),
+		'res': preload("res://Entitites/Objects/Program.tscn"),
+		'traits': []
+	},
+	'rootkit': {
+		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
+		'res': preload("res://Entitites/Threats/Rootkit.tscn"),
+		'traits': ['Corruption3']
+	},
+	'spyware': {
+		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
+		'res': preload("res://Entitites/Threats/Spyware.tscn"),
+		'traits': []
+	},
+	'trojan': {
+		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
+		'res': preload("res://Entitites/Threats/Trojan.tscn"),
+		'traits': []
+	},
+	'virus': {
+		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
+		'res': preload("res://Entitites/Threats/Virus.tscn"),
+		'traits': []
+	},
+	'worm': {
+		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
+		'res': preload("res://Entitites/Threats/Worm.tscn"),
+		'traits': ['Worm']
 	}
 }

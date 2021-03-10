@@ -15,3 +15,11 @@ func on_round():
 
 func run() -> bool:
 	return true
+
+
+func run_or_skip() -> bool:
+	if 'Stunned' in _entity._traits:
+		on_round()
+		return true
+	else:
+		return run()

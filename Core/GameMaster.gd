@@ -19,9 +19,22 @@ var _traits = preload("res://Traits/Traits.tscn").instance()
 var world = null setget set_world, get_world
 
 
+func _process(delta):
+	var done = false
+	var actor = _actors[_actor_index]
+	while !done:
+		if actor.is_idle() and state == State.PLAY and actor.run():
+			_actor_index = (_actor_index + 1) % len(_actors)
+			actor = _actors[_actor_index]
+		else:
+			done = true
+
+
 func _unhandled_input(event):
 	if event.is_action_pressed("next_hack"):
-		player.mind.next_hack()
+		player.mind.next_hack(world.get_parent().find_node('HackSkill'))
+	elif event.is_action_pressed("next_crack"):
+		player.mind.next_crack(world.get_parent().find_node('CrackSkill'))
 
 
 func add_trait(entity:Entity, trait_id:String) -> Entity:
@@ -57,13 +70,22 @@ func damage(actor:Entity, target:Entity, value:int, skill:Skill, params:Dictiona
 		for t in target._traits:
 			value = get_trait(t).on_damage(actor, target, value, skill, params)
 		if value > 0:
+			if actor == player or target == player:
+				shake()
 			target.integrity -= value
 			if skill != null:
 				skill.on_damage(actor, target, params)
 	return params
 
 
-func flash(color:Color) -> Node:
+func flash(color:Color=Color(1,1,1,0.25)) -> Node:
+	var flash = world.get_parent().find_node('Flash')
+	var tween = Tween.new()
+	var duration = 0.05
+	tween.interpolate_property(flash, 'color', Color.transparent, color, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.interpolate_property(flash, 'color', color, Color.transparent, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, duration)
+	world.add_child(tween)
+	tween.start()
 	return self
 
 
@@ -127,6 +149,10 @@ func kill(entity:Entity):
 			world.remove_child(entity)
 
 
+func remove_trait(entity:Entity, trait_id:String):
+	entity._traits.erase(trait_id)
+
+
 func resume(delay:float=0.0):
 	if delay > 0.0:
 		yield(get_tree().create_timer(delay), "timeout")
@@ -141,7 +167,19 @@ func set_world(value:Node):
 	world = value
 
 
-func shake(times:int) -> Node:
+func shake(times:int=1) -> Node:
+	var tween = Tween.new()
+	var duration = 0.05
+	var size = Vector2(4, 0)
+	var delay = 0
+	for i in times:
+		tween.interpolate_property(world, 'position', Vector2.ZERO, size, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, delay)
+		delay += duration
+		tween.interpolate_property(world, 'position', size, Vector2.ZERO, duration, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, delay)
+		delay += duration
+		size *= 1
+	world.add_child(tween)
+	tween.start()
 	return self
 
 
@@ -181,17 +219,17 @@ func teleport(entity:Entity, coords:Vector2, animate:bool=false):
 			old_cell.move_out(entity)
 		entity.grid_position = coords
 		cell.move_in(entity)
-
-
-func tick():
-	var done = false
-	var actor = _actors[_actor_index]
-	while !done:
-		if actor.is_idle() and state == State.PLAY and actor.run():
-			_actor_index = (_actor_index + 1) % len(_actors)
-			actor = _actors[_actor_index]
-		else:
-			done = true
+#
+#
+#func tick():
+#	var done = false
+#	var actor = _actors[_actor_index]
+#	while !done:
+#		if actor.is_idle() and state == State.PLAY and actor.run():
+#			_actor_index = (_actor_index + 1) % len(_actors)
+#			actor = _actors[_actor_index]
+#		else:
+#			done = true
 
 
 func try_action(action_id:String, actor:Entity, params:Dictionary) -> bool:

@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Ui/Progress.gd" type="Script" id=1]
+
+[node name="Progress" type="Control"]
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bg" type="ColorRect" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 34.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 32, 32 )
+color = Color( 0.2, 0.2, 0.2, 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Border" type="ColorRect" parent="."]
+show_behind_parent = true
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 36, 36 )
+rect_clip_content = true
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
