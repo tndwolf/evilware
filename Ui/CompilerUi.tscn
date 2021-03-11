@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/ui_border-fill.png" type="Texture" id=1]
+[ext_resource path="res://Ui/SkillList.tscn" type="PackedScene" id=2]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 8, 8 )
+margin_left = 2.0
+margin_right = 2.0
+margin_top = 2.0
+margin_bottom = 2.0
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+
+[node name="CompilerUi" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+margin_right = 256.0
+margin_bottom = 11.0
+custom_styles/normal = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Compiler Terminal"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 15.0
+margin_right = 256.0
+margin_bottom = 32.0
+text = "> Integrity fully Recovered
+> You can use Bits to buy or upgrade a Skill "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 36.0
+margin_right = 256.0
+margin_bottom = 54.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CrackList" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+modulate = Color( 1, 0.85098, 0.34902, 1 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 82.0
+margin_bottom = 18.0
+
+[node name="HackList" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+modulate = Color( 0.368627, 0.717647, 1, 1 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 86.0
+margin_right = 169.0
+margin_bottom = 18.0
+
+[node name="RefList" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 2 )]
+modulate = Color( 0.352941, 1, 0.572549, 1 )
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 173.0
+margin_right = 256.0
+margin_bottom = 18.0
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+margin_top = 58.0
+margin_right = 256.0
+margin_bottom = 75.0
+text = "> SKILL DESCRIPTION
+> Pick a Skill"
+__meta__ = {
+"_edit_use_anchors_": false
+}

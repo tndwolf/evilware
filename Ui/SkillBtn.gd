@@ -5,8 +5,7 @@ export var color:Color = Color.white
 
 
 func _ready():
-	$Border.color = color
-	$Sprite.modulate = color
+	modulate = color
 
 
 func set_icon(icon_id:int):

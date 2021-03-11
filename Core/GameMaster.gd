@@ -75,6 +75,8 @@ func damage(actor:Entity, target:Entity, value:int, skill:Skill, params:Dictiona
 			target.integrity -= value
 			if skill != null:
 				skill.on_damage(actor, target, params)
+			if target == player:
+				UI.integrity_bar.value = target.integrity
 	return params
 
 
@@ -136,17 +138,18 @@ func goto_level(level_id:String):
 
 func kill(entity:Entity):
 	if entity == player:
+#		print('killing player with integrity %d' % entity.integrity)
 		pass
 	else:
 		var res = {}
 		for t in entity._traits:
 			get_trait(t).on_death(entity, res)
 		if !'keep_alive' in res:
-			if _actors[_actor_index] == entity:
-				_actor_index = (_actor_index) % (len(_actors) - 1)
 			Map.at(entity.grid_position).move_out(entity)
 			_actors.erase(entity)
 			world.remove_child(entity)
+			if _actor_index >= len(_actors):
+				_actor_index = 0
 
 
 func remove_trait(entity:Entity, trait_id:String):

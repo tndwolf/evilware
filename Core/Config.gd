@@ -2,7 +2,7 @@ extends Node
 
 
 const ATTACK_DURATION = 0.2
-const CELL_SIZE = Vector2(36, 36)
+const CELL_SIZE = Vector2(20, 20)
 const HIGH_DAMAGE = 16
 const LOW_DAMAGE = 4
 const MODERATE_DAMAGE = 8

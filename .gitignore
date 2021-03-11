@@ -10,4 +10,5 @@ data_*/
 # Project-specific
 *.aseprite
 *.jpg
-Assets/mockup.jpg.import
+*.jpg.import
+*Copia*
