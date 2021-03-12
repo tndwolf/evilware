@@ -48,17 +48,32 @@ func collect(only_free:bool=false) -> Array:
 
 
 func first(only_free:bool=false) -> Cell:
-	for cell in _cells:
-		if only_free and _is_valid(cell):
-			return cell
-		else:
-			return cell
+	if only_free:
+		for cell in _cells:
+			if _is_valid(cell):
+				return cell
 	return null if len(_cells) == 0 else _cells[0]
+
+
+func fov() -> MapQuery:
+	clear()
+	for cell in Map._cells_in_los:
+		_cells.append(cell)
+	return self
 
 
 func initialize(map) -> MapQuery:
 	_cells.clear()
 	self.map = map
+	return self
+
+
+func in_los() -> MapQuery:
+	var res = []
+	for cell in _cells:
+		if cell.in_los:
+			res.append(cell)
+	_cells = res
 	return self
 
 

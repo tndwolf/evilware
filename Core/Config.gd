@@ -58,9 +58,16 @@ var templates = {
 		'traits': ['Annoy', 'Teleport']
 	},
 	'bug': {
+		'meta': {'bits': 2},
 		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
 		'res': preload("res://Entitites/Threats/Bug.tscn"),
 		'traits': ['Bug', 'Corruption1']
+	},
+	'compiler': {
+		'faction': Entity.Faction.PLAYER,
+		'meta': {'use_type': 'compiler'},
+		'res': preload("res://Entitites/Objects/Compiler.tscn"),
+		'traits': []
 	},
 	'corrupted_file': {
 		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
@@ -86,7 +93,7 @@ var templates = {
 	'fork': {
 		'faction': Entity.Faction.PLAYER,
 		'mind': preload("res://Entitites/Minds/Mind.gd"),
-		'res': preload("res://Entitites/Player/Player.tscn"),
+		'res': preload("res://Entitites/Player/Fork.tscn"),
 		'traits': ['Fork']
 	},
 	'infected_program': {

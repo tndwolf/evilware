@@ -26,8 +26,9 @@ func on_damage(actor:Entity, target:Entity, params:Dictionary) -> Dictionary:
 
 
 func on_purchased(entity:Entity):
+	print('%s purchased %s' % [entity, name])
 	pass
 
 
-func on_used(actor:Entity, area:MapQuery):
-	pass
+func on_used(actor:Entity, area:MapQuery) -> bool:
+	return true

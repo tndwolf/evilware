@@ -9,13 +9,16 @@ func attempt(actor:Entity, params:Dictionary) -> bool:
 		match use_type:
 			'cd':
 				GM.goto_level(target.meta.get('value', '/home'))
+			
+			'compiler':
+				UI.switch_to_compiler()
 				
 			'data':
 				actor.meta['bits'] += target.meta.get('value', 1)
 				print('total bits %d' % actor.meta['bits'])
 				GM.kill(target)
 			
-			'cd':
-				GM.teleport(actor, target.meta.get('pointer', actor.grid_position))
+#			'cd':
+#				GM.teleport(actor, target.meta.get('pointer', actor.grid_position))
 		res = true
 	return res

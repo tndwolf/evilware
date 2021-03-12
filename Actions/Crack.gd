@@ -13,7 +13,9 @@ func attack(actor:Entity, target:Entity):
 	if atk > 0:
 		target.add_child(Fx.instance())
 	yield(actor.animate_attack(target), 'tween_all_completed')
-	GM.damage(actor, target, atk, skill)
+	if 'dead' in GM.damage(actor, target, atk, skill) and actor == GM.player:
+		print('player kill, adding bits')
+		actor.meta['bits'] += target.meta.get('bits', 0)
 	GM.resume()
 
 

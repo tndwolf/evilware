@@ -3,7 +3,8 @@ extends Node
 
 enum State {
 	PLAY,
-	PAUSE
+	PAUSE,
+	UI_PAUSE
 }
 
 
@@ -72,6 +73,8 @@ func damage(actor:Entity, target:Entity, value:int, skill:Skill, params:Dictiona
 		if value > 0:
 			if actor == player or target == player:
 				shake()
+			if target.integrity - value < 0:
+				params['dead'] = true
 			target.integrity -= value
 			if skill != null:
 				skill.on_damage(actor, target, params)
@@ -157,8 +160,14 @@ func remove_trait(entity:Entity, trait_id:String):
 
 
 func resume(delay:float=0.0):
-	if delay > 0.0:
-		yield(get_tree().create_timer(delay), "timeout")
+	if state == State.PAUSE:
+		if delay > 0.0:
+			yield(get_tree().create_timer(delay), "timeout")
+		print("Resumed")
+		state = State.PLAY
+
+
+func resume_play():
 	state = State.PLAY
 
 
@@ -210,8 +219,10 @@ func spawn_player(coords:Vector2) -> Entity:
 	return player
 
 
-func stop():
-	state = State.PAUSE
+func stop(new_state=State.PAUSE):
+	if state == State.PLAY or new_state == State.UI_PAUSE:
+		state = new_state
+		print("Stopped")
 
 
 func teleport(entity:Entity, coords:Vector2, animate:bool=false):

@@ -9,3 +9,7 @@ func on_death(entity:Entity, params:Dictionary={}) -> Dictionary:
 		if len(cells) > 0:
 			GM.spawn_at('bug', cells[0].grid_position)
 	return params
+
+
+func on_added(entity:Entity, params:Dictionary={}):
+	entity.meta['bits'] = 2

@@ -22,3 +22,23 @@ patch_margin_bottom = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CenterContainer"]
+margin_left = 127.0
+margin_top = 71.0
+margin_right = 128.0
+margin_bottom = 78.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Integrity"
+align = 1
+valign = 1
+clip_text = true
