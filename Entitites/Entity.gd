@@ -31,10 +31,8 @@ func animate_attack(target:Entity) -> Tween:
 	var dx = end.x - start.x
 	if dx > 0:
 		flip_h = false
-#		scale = Vector2(-1.0, 1.0)
 	elif dx < 0:
 		flip_h = true
-#		scale = Vector2(-1.0, 1.0)
 	_tween.interpolate_property(self, 'position', start, end, Config.ATTACK_DURATION/2)
 	_tween.interpolate_property(self, 'position', end, start, Config.ATTACK_DURATION/2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, Config.ATTACK_DURATION/2)
 	_tween.start()
@@ -49,10 +47,8 @@ func animate_move(by:Vector2) -> Tween:
 	_tween.start()
 	if by.x > 0:
 		flip_h = false
-#		scale = Vector2.ONE
 	elif by.x < 0:
 		flip_h = true
-#		scale = Vector2(-1.0, 1.0)
 	return _tween
 
 
@@ -86,11 +82,14 @@ func initialize(template:Dictionary) -> Entity:
 		set_mind(template['mind'].new())
 	for trait_id in template.get('traits', []):
 		GM.add_trait(self, trait_id)
-	match faction:
-		Faction.ENEMY:
-			self_modulate = Config.COLOR_THREATS
-		Faction.PLAYER:
+	if self_modulate == Color.white and faction == Faction.ENEMY:
+		self_modulate = Config.COLOR_THREATS
+	elif faction == Faction.PLAYER:
 			self_modulate = Config.COLOR_FRIENDLY
+	if 'use_type' in meta:
+		self_modulate = Config.COLOR_OBJECT
+	if 'program' in meta:
+		frame += randi() % 3
 	return self
 
 

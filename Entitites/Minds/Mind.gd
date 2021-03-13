@@ -6,6 +6,7 @@ var crack = 'rm'
 var _entity = null
 var hack = null
 var _started = false
+var target = null
 
 
 func on_round():

@@ -20,7 +20,7 @@ texture = ExtResource( 1 )
 centered = false
 vframes = 8
 hframes = 8
-frame = 51
+frame = 53
 
 [node name="TextureProgress" type="TextureProgress" parent="."]
 anchor_left = 0.5

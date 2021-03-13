@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/perces1.ogg-c790d77dd2e9e721868b4731bf4b6400.oggstr"
+
+[deps]
+
+source_file="res://Assets/perces1.ogg"
+dest_files=[ "res://.import/perces1.ogg-c790d77dd2e9e721868b4731bf4b6400.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

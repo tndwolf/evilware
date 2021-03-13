@@ -12,14 +12,18 @@ func clear():
 
 
 func is_possessed(skill_name)->bool:
-	return GM.player.mind.has_skill(skill_name)
+	if skill_name in GM.player.mind._overridden_skills:
+		return true
+	else:
+		return GM.player.mind.has_skill(skill_name)
 
 
 func is_purchasable(skill_name)->bool:
 	if is_possessed(skill_name):
 		return false
 	var skill = GM.get_skill(skill_name)
-	if skill.cost <= GM.player.meta.get('bits', 0):
+#	if skill.cost <= GM.player.meta.get('bits', 0):
+	if skill.is_available(GM.player):
 		return true
 	else:
 		return false

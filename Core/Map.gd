@@ -28,15 +28,15 @@ func calculate_astar(include_diagonals=true) -> Node:
 		for x in range(w):
 			var i = x + y * w
 			_astar.add_point(i, _cells[i].grid_position)
-			if !_cells[i].blocks_movement:
-				if x > 0 and !_cells[i-1].blocks_movement:
+			if _cells[i].is_walkable():
+				if x > 0 and _cells[i-1].is_walkable():
 					_astar.connect_points(i, i-1)
-				if y > 0 and !_cells[i-w].blocks_movement:
+				if y > 0 and _cells[i-w].is_walkable():
 					_astar.connect_points(i, i-w)
 				if include_diagonals and x > 0 and y > 0:
-					if !_cells[i-w-1].blocks_movement:
+					if _cells[i-w-1].is_walkable():
 						_astar.connect_points(i, i-w-1)
-					if !_cells[i-w].blocks_movement and !_cells[i-1].blocks_movement:
+					if _cells[i-w].is_walkable() and _cells[i-1].is_walkable():
 						_astar.connect_points(i-1, i-w)
 	return self
 

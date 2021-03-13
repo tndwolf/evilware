@@ -16,10 +16,10 @@ expand_margin_right = 2.0
 expand_margin_top = 2.0
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 1, 0.356863, 0.356863, 1 )
+bg_color = Color( 0.368627, 0.717647, 1, 1 )
 
 [sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.368627, 0.717647, 1, 1 )
+bg_color = Color( 1, 0.356863, 0.356863, 1 )
 
 [node name="CompilerUi" type="Panel"]
 anchor_right = 1.0
@@ -47,6 +47,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="VBoxContainer"]
+modulate = Color( 0.8, 0.8, 0.8, 1 )
 margin_top = 15.0
 margin_right = 256.0
 margin_bottom = 32.0
@@ -84,16 +85,15 @@ margin_left = 173.0
 margin_right = 256.0
 margin_bottom = 18.0
 
-[node name="DescriptionLabel" type="RichTextLabel" parent="VBoxContainer"]
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
+modulate = Color( 0.8, 0.8, 0.8, 1 )
 margin_top = 58.0
 margin_right = 256.0
 margin_bottom = 139.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_colors/default_color = Color( 0.752941, 0.752941, 0.752941, 1 )
-bbcode_enabled = true
-bbcode_text = "> Pick a Skill to show its description"
 text = "> Pick a Skill to show its description"
+autowrap = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 143.0
@@ -116,6 +116,7 @@ margin_left = 118.0
 margin_right = 150.0
 margin_bottom = 7.0
 custom_styles/normal = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Implement"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -132,6 +133,7 @@ margin_left = 240.0
 margin_right = 256.0
 margin_bottom = 7.0
 custom_styles/normal = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Close"
 __meta__ = {
 "_edit_use_anchors_": false

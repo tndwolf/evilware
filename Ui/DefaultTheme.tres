@@ -5,11 +5,11 @@
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=2]
 
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxEmpty" id=3]
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="StyleBoxTexture" id=5]
@@ -38,9 +38,16 @@ Button/constants/hseparation = 2
 Button/fonts/font = null
 Button/styles/disabled = SubResource( 1 )
 Button/styles/focus = SubResource( 1 )
-Button/styles/hover = SubResource( 7 )
-Button/styles/normal = SubResource( 4 )
-Button/styles/pressed = SubResource( 8 )
+Button/styles/hover = SubResource( 2 )
+Button/styles/normal = SubResource( 3 )
+Button/styles/pressed = SubResource( 4 )
+HSlider/icons/grabber = ExtResource( 1 )
+HSlider/icons/grabber_disabled = ExtResource( 1 )
+HSlider/icons/grabber_highlight = ExtResource( 1 )
+HSlider/icons/tick = null
+HSlider/styles/grabber_area = null
+HSlider/styles/grabber_area_highlight = null
+HSlider/styles/slider = null
 Panel/styles/panel = SubResource( 5 )
 TooltipLabel/colors/font_color = Color( 1, 1, 1, 1 )
 TooltipLabel/colors/font_color_shadow = Color( 0, 0, 0, 1 )

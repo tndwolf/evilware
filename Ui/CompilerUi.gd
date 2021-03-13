@@ -20,7 +20,7 @@ func _ready():
 	hack_list.set_list(_list_skills('Hacking'))
 	ref_list = find_node('RefList').set_title('Refactoring')
 	ref_list.set_list(_list_skills('Refactoring'))
-	_default_text = _description.bbcode_text
+	_default_text = _description.text#bbcode_text
 
 
 func _list_skills(category:String) -> Array:
@@ -38,14 +38,13 @@ func _on_skill_toggled(pressed:bool, item:String, btn:Button):
 			_last_selected.pressed = false
 		_last_selected = btn
 		var skill = GM.get_skill(item)
-		var text = '> [color=#FFFFFF]%s[/color] ( )\n> %s\n> Cost: [color=#FFFFFF]%d[/color] bits' % [item, skill.description, skill.cost]
-		_description.bbcode_text = ''
-		_description.append_bbcode(text)
+		var text = '> %s ()\n> %s\n> Cost: %d bits' % [item, skill.description, skill.cost]
+		_description.text = text
 		_selected_skill = skill
 	else:
 		_last_selected = null
 		_selected_skill = null
-		_description.bbcode_text = _default_text
+		_description.text = _default_text
 
 
 func _on_CloseButton_pressed():
@@ -54,10 +53,13 @@ func _on_CloseButton_pressed():
 
 func _on_BuyButton_pressed():
 	GM.player.mind.add_skill(_selected_skill)
+	GM.player.mind.set_skill(_selected_skill)
 	_selected_skill = null
 	_last_selected = null
-	_description.bbcode_text = _default_text
+	_description.text = _default_text
 	_update()
+	print(GM.player.mind._available_cracks)
+	print(GM.player.mind._available_hacks)
 
 
 func open():

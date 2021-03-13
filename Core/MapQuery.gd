@@ -105,6 +105,20 @@ func pair(distance:float=1.0) -> MapQuery:
 	return self
 
 
+func pop_first(only_free:bool=false) -> Cell:
+	var res = first(only_free)
+	if res:
+		_cells.pop_front()
+	return res
+
+
+func pop_random(only_free:bool=false) -> Cell:
+	var res = random(only_free)
+	if res:
+		_cells.erase(res)
+	return res
+
+
 func _random() -> Cell:
 	return map.at(Vector2(
 		randi() % map.width(),

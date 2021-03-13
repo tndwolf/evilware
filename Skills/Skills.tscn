@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Skills/rm.gd" type="Script" id=1]
 [ext_resource path="res://Skills/delete.gd" type="Script" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://Skills/test.gd" type="Script" id=13]
 [ext_resource path="res://Skills/composition.gd" type="Script" id=14]
 [ext_resource path="res://Skills/fork.gd" type="Script" id=15]
+[ext_resource path="res://Skills/infect.gd" type="Script" id=16]
+[ext_resource path="res://Skills/sneak.gd" type="Script" id=17]
 
 [node name="Skills" type="Node"]
 
@@ -22,12 +24,12 @@
 script = ExtResource( 10 )
 category = "Hacking"
 cost = 48
-description = "Removes all resistances from a target."
-icon_frame = 60
+description = "Weakens all targets in a 5x5 area."
+icon_frame = 52
 
 [node name="composition" type="Node" parent="."]
 script = ExtResource( 14 )
-description = "Increase Integrity."
+description = "Increase resistance to Cell Corruption by 1 (max 2)."
 
 [node name="defrag" type="Node" parent="."]
 script = ExtResource( 7 )
@@ -77,18 +79,18 @@ icon_frame = 63
 script = ExtResource( 8 )
 category = "Hacking"
 cost = 32
-description = "Weakens all targets in a 5x5 area."
-icon_frame = 52
+description = "Inspect a target. Does not require cooldown"
+icon_frame = 51
 
 [node name="patch" type="Node" parent="."]
 script = ExtResource( 12 )
-description = "Increase Security."
+description = "Increase Integrity by 8 (max 32)."
 
 [node name="sleep" type="Node" parent="."]
 script = ExtResource( 9 )
 category = "Hacking"
 cost = 32
-description = "Stuns target."
+description = "Puts target into sleep for 5 ticks"
 icon_frame = 61
 
 [node name="rm" type="Node" parent="."]
@@ -112,4 +114,13 @@ icon_frame = 49
 
 [node name="test" type="Node" parent="."]
 script = ExtResource( 13 )
-description = "Increase Robustness."
+description = "Increase Damage Reduction by 1 (max 3)"
+
+[node name="infect" type="Node" parent="."]
+script = ExtResource( 16 )
+category = "None"
+description = "Converts Programs to Infected Programs"
+
+[node name="sneak" type="Node" parent="."]
+script = ExtResource( 17 )
+category = "None"

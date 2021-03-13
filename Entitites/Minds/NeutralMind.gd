@@ -1,7 +1,5 @@
 extends Mind
 
-var target = null
-
 
 func run() -> bool:
 	on_round()

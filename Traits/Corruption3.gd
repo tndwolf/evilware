@@ -1,6 +1,10 @@
 extends Trait
 
 
+#func on_added(entity:Entity, params:Dictionary={}):
+#	entity.mind.crack = 'delete'
+
+
 func on_round(entity:Entity):
 	var cells = Map.query().burst(entity.grid_position, 1).collect()
 	for cell in cells:

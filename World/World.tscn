@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://World/World.gd" type="Script" id=1]
 [ext_resource path="res://Ui/SkillBtn.tscn" type="PackedScene" id=2]
@@ -6,6 +6,58 @@
 [ext_resource path="res://Ui/CompilerUi.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Ui/LargeFont.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Ui/DefaultTheme.tres" type="Theme" id=6]
+[ext_resource path="res://Ui/BitsFx.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/perces1.ogg" type="AudioStream" id=8]
+[ext_resource path="res://Assets/logo.png" type="Texture" id=9]
+
+[sub_resource type="Animation" id=1]
+resource_name = "fade_to_black"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_to_screen"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.356863, 0.356863, 1 ), Color( 1, 0.356863, 0.356863, 0.666667 ), Color( 1, 0.356863, 0.356863, 1 ) ]
+}
 
 [node name="PlayState" type="Node2D"]
 script = ExtResource( 1 )
@@ -13,17 +65,6 @@ script = ExtResource( 1 )
 [node name="World" type="YSort" parent="."]
 
 [node name="UiLayer" type="CanvasLayer" parent="."]
-
-[node name="Flash" type="ColorRect" parent="UiLayer"]
-margin_left = -62.0
-margin_top = -67.0
-margin_right = 588.0
-margin_bottom = 365.0
-mouse_filter = 2
-color = Color( 1, 1, 1, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UiLayer"]
 anchor_top = 1.0
@@ -35,6 +76,56 @@ alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Panel" type="Panel" parent="UiLayer/HBoxContainer"]
+visible = false
+margin_right = 198.0
+margin_bottom = 21.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MsgLabel" type="Label" parent="UiLayer/HBoxContainer/Panel"]
+margin_right = 40.0
+margin_bottom = 7.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control4" type="Control" parent="UiLayer/HBoxContainer"]
+margin_right = 2.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 2, 0 )
+mouse_filter = 2
+
+[node name="BitsIcon" parent="UiLayer/HBoxContainer" instance=ExtResource( 2 )]
+self_modulate = Color( 0.368627, 0.717647, 1, 1 )
+margin_left = 6.0
+margin_right = 22.0
+hint_tooltip = "Bits"
+
+[node name="BitsLabel" type="Label" parent="UiLayer/HBoxContainer/BitsIcon"]
+self_modulate = Color( 0.368627, 0.717647, 1, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "100"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BitsFx" parent="UiLayer/HBoxContainer/BitsIcon/BitsLabel" instance=ExtResource( 7 )]
+position = Vector2( 7.49154, 8.98984 )
+
+[node name="Control3" type="Control" parent="UiLayer/HBoxContainer"]
+margin_left = 26.0
+margin_right = 204.0
+margin_bottom = 21.0
+rect_min_size = Vector2( 2, 0 )
+mouse_filter = 2
+size_flags_horizontal = 3
 
 [node name="HackSkill" parent="UiLayer/HBoxContainer" instance=ExtResource( 2 )]
 margin_left = 208.0
@@ -61,7 +152,7 @@ rect_min_size = Vector2( 2, 0 )
 mouse_filter = 2
 
 [node name="Integrity" parent="UiLayer" instance=ExtResource( 3 )]
-modulate = Color( 0.368627, 0.717647, 1, 1 )
+visible = false
 margin_left = 4.0
 margin_top = 4.0
 margin_right = -202.0
@@ -79,6 +170,7 @@ margin_right = 115.0
 margin_bottom = 64.0
 
 [node name="DeathUi" type="Panel" parent="UiLayer"]
+visible = false
 modulate = Color( 1, 0.356863, 0.356863, 1 )
 anchor_left = 0.5
 anchor_top = 0.5
@@ -115,4 +207,280 @@ margin_right = 20.0
 margin_bottom = 11.5
 theme = ExtResource( 6 )
 text = "rebuild ( )"
+
+[node name="Flash" type="ColorRect" parent="UiLayer"]
+margin_left = -62.0
+margin_top = -67.0
+margin_right = 588.0
+margin_bottom = 365.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FadeAnimation" type="AnimationPlayer" parent="UiLayer/Flash"]
+anims/fade_to_black = SubResource( 1 )
+anims/fade_to_screen = SubResource( 2 )
+
+[node name="MessageUi" type="Panel" parent="UiLayer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -64.0
+margin_top = -32.0
+margin_right = 64.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageLabel" type="Label" parent="UiLayer/MessageUi"]
+modulate = Color( 0.8, 0.8, 0.8, 1 )
+margin_right = 128.0
+margin_bottom = 30.0
+text = "Test
+Message
+Multiline"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseMsgButton" type="Button" parent="UiLayer/MessageUi"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = 18.5
+margin_right = 20.0
+margin_bottom = 25.5
+theme = ExtResource( 6 )
+text = "Close"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleLayer" type="CanvasLayer" parent="."]
+
+[node name="MainPanel" type="Panel" parent="TitleLayer"]
+self_modulate = Color( 1, 0.356863, 0.356863, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -78.0
+margin_top = -9.0
+margin_right = 78.0
+margin_bottom = 55.0
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TitleBox" type="VBoxContainer" parent="TitleLayer/MainPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control2" type="Control" parent="TitleLayer/MainPanel/TitleBox"]
+margin_right = 156.0
+margin_bottom = 13.0
+size_flags_vertical = 3
+
+[node name="StartBtn" type="Button" parent="TitleLayer/MainPanel/TitleBox"]
+modulate = Color( 1, 0.356863, 0.356863, 1 )
+margin_top = 17.0
+margin_right = 156.0
+margin_bottom = 24.0
+text = "BUILD"
+
+[node name="OptBtn" type="Button" parent="TitleLayer/MainPanel/TitleBox"]
+modulate = Color( 1, 0.356863, 0.356863, 1 )
+margin_top = 28.0
+margin_right = 156.0
+margin_bottom = 35.0
+text = "OPTIONS"
+
+[node name="HelpBtn" type="Button" parent="TitleLayer/MainPanel/TitleBox"]
+modulate = Color( 1, 0.356863, 0.356863, 1 )
+margin_top = 39.0
+margin_right = 156.0
+margin_bottom = 46.0
+text = "HELP"
+
+[node name="Control" type="Control" parent="TitleLayer/MainPanel/TitleBox"]
+margin_top = 50.0
+margin_right = 156.0
+margin_bottom = 64.0
+size_flags_vertical = 3
+
+[node name="OptBox" type="VBoxContainer" parent="TitleLayer/MainPanel"]
+visible = false
+modulate = Color( 1, 0.356863, 0.356863, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control3" type="Control" parent="TitleLayer/MainPanel/OptBox"]
+margin_right = 156.0
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="TitleLayer/MainPanel/OptBox"]
+margin_top = 4.0
+margin_right = 156.0
+margin_bottom = 11.0
+text = "Music Volume"
+align = 1
+
+[node name="MusSlider" type="HSlider" parent="TitleLayer/MainPanel/OptBox"]
+margin_top = 15.0
+margin_right = 156.0
+margin_bottom = 31.0
+min_value = -80.0
+max_value = 0.0
+step = 5.0
+value = -15.0
+
+[node name="Label2" type="Label" parent="TitleLayer/MainPanel/OptBox"]
+margin_top = 35.0
+margin_right = 156.0
+margin_bottom = 42.0
+text = "Sfx Volume"
+align = 1
+
+[node name="SfxSlider" type="HSlider" parent="TitleLayer/MainPanel/OptBox"]
+margin_top = 46.0
+margin_right = 156.0
+margin_bottom = 62.0
+min_value = -80.0
+max_value = 0.0
+step = 5.0
+value = -15.0
+
+[node name="Control4" type="Control" parent="TitleLayer/MainPanel/OptBox"]
+margin_top = 66.0
+margin_right = 156.0
+margin_bottom = 66.0
+size_flags_vertical = 3
+
+[node name="OptBackButton" type="Button" parent="TitleLayer/MainPanel/OptBox"]
+margin_top = 70.0
+margin_right = 156.0
+margin_bottom = 77.0
+text = "BACK"
+
+[node name="StartBox" type="VBoxContainer" parent="TitleLayer/MainPanel"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Control5" type="Control" parent="TitleLayer/MainPanel/StartBox"]
+margin_right = 96.0
+margin_bottom = 19.0
+size_flags_vertical = 3
+
+[node name="StartWarrior" type="Button" parent="TitleLayer/MainPanel/StartBox"]
+modulate = Color( 1, 0.356863, 0.356863, 1 )
+margin_top = 23.0
+margin_right = 96.0
+margin_bottom = 30.0
+text = "cracking.exe"
+
+[node name="StartWizard" type="Button" parent="TitleLayer/MainPanel/StartBox"]
+modulate = Color( 1, 0.356863, 0.356863, 1 )
+margin_top = 34.0
+margin_right = 96.0
+margin_bottom = 41.0
+text = "hacking.exe"
+
+[node name="Control6" type="Control" parent="TitleLayer/MainPanel/StartBox"]
+margin_top = 45.0
+margin_right = 96.0
+margin_bottom = 64.0
+size_flags_vertical = 3
+
+[node name="HelpBox" type="VBoxContainer" parent="TitleLayer/MainPanel"]
+visible = false
+modulate = Color( 1, 0.356863, 0.356863, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="TitleLayer/MainPanel/HelpBox"]
+margin_right = 156.0
+margin_bottom = 67.0
+text = "RIGHT click to MOVE (or WASD/ARROWS)
+
+Q toggle CRACKING skill
+> Bump into a Threat to attack
+
+E toggle HACKING skill
+> LEFT clik Cell to use"
+
+[node name="CloseHelpButton" type="Button" parent="TitleLayer/MainPanel/HelpBox"]
+margin_top = 71.0
+margin_right = 156.0
+margin_bottom = 78.0
+text = "BACK"
+
+[node name="LogoPanel" type="Panel" parent="TitleLayer"]
+self_modulate = Color( 1, 0.356863, 0.356863, 1 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -111.5
+margin_top = -56.5
+margin_right = 111.5
+margin_bottom = -23.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Logo" type="Sprite" parent="TitleLayer/LogoPanel"]
+modulate = Color( 1, 0.356863, 0.356863, 1 )
+position = Vector2( 110, 16 )
+texture = ExtResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TitleLayer/LogoPanel/Logo"]
+autoplay = "idle"
+anims/idle = SubResource( 3 )
+
+[node name="CreditsLabel" type="Label" parent="TitleLayer"]
+modulate = Color( 1, 0.356863, 0.356863, 0.231373 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -7.0
+margin_right = 177.0
+text = "Music: Perces by https://opengameart.org/users/poinl"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
+bus = "Bgm"
+[connection signal="gui_input" from="UiLayer/HBoxContainer/HackSkill" to="." method="_on_HackSkill_gui_input"]
+[connection signal="gui_input" from="UiLayer/HBoxContainer/CrackSkill" to="." method="_on_CrackSkill_gui_input"]
 [connection signal="pressed" from="UiLayer/DeathUi/RespawnButton" to="." method="_on_RespawnButton_pressed"]
+[connection signal="pressed" from="UiLayer/MessageUi/CloseMsgButton" to="." method="_on_CloseMsgButton_pressed"]
+[connection signal="pressed" from="TitleLayer/MainPanel/TitleBox/StartBtn" to="." method="_on_StartBtn_pressed"]
+[connection signal="pressed" from="TitleLayer/MainPanel/TitleBox/OptBtn" to="." method="_on_OptBtn_pressed"]
+[connection signal="pressed" from="TitleLayer/MainPanel/TitleBox/HelpBtn" to="." method="_on_HelpBtn_pressed"]
+[connection signal="value_changed" from="TitleLayer/MainPanel/OptBox/MusSlider" to="." method="_on_MusSlider_value_changed"]
+[connection signal="value_changed" from="TitleLayer/MainPanel/OptBox/SfxSlider" to="." method="_on_SfxSlider_value_changed"]
+[connection signal="pressed" from="TitleLayer/MainPanel/OptBox/OptBackButton" to="." method="_on_OptBackButton_pressed"]
+[connection signal="pressed" from="TitleLayer/MainPanel/StartBox/StartWarrior" to="." method="_on_StartWarrior_pressed"]
+[connection signal="pressed" from="TitleLayer/MainPanel/StartBox/StartWizard" to="." method="_on_StartWizard_pressed"]
+[connection signal="pressed" from="TitleLayer/MainPanel/HelpBox/CloseHelpButton" to="." method="_on_CloseHelpButton_pressed"]

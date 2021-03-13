@@ -74,7 +74,7 @@ func _get_visible_color() -> Color:
 		Type.ABYSS:
 			res = Color.transparent
 		Type.FLOOR:
-			res = CORRUPTION_COLOR[corruption].lightened(_color_shift)
+			res = CORRUPTION_COLOR[corruption].lightened(0.2 + _color_shift)
 		Type.INVALID:
 			res = Color.transparent
 		Type.WALL:
@@ -83,7 +83,6 @@ func _get_visible_color() -> Color:
 
 
 func hide():
-#	return
 	_tween.stop_all()
 	var start = modulate
 	var end = _get_visible_color() * Color(1, 1, 1, 0.25)
@@ -104,6 +103,9 @@ func is_walkable() -> bool:
 func move_in(entity:Node):
 	if !entity in _entities:
 		_entities.append(entity)
+		update_corruption(entity)
+		if !in_los:
+			entity.hide()
 
 
 func move_out(entity:Node):
@@ -113,7 +115,7 @@ func move_out(entity:Node):
 func set_cell_type(value:int):
 	if cell_type != value:
 		cell_type = value
-		$Sprite.scale = Vector2.ONE
+#		$Sprite.scale = Vector2.ONE
 		match value:
 			Type.ABYSS:
 				z_index = -10
@@ -127,7 +129,7 @@ func set_cell_type(value:int):
 			Type.WALL:
 				z_index = 0
 				$Sprite.frame = randi() % 4
-				$Sprite.scale = Vector2(1.125, 1.0)
+#				$Sprite.scale = Vector2(1.125, 1.0)
 
 
 func set_corruption(value:int):
@@ -138,6 +140,8 @@ func set_corruption(value:int):
 			corruption = value
 			if in_los:
 				show()
+		for e in _entities:
+			update_corruption(e)
 
 
 func set_grid_position(value:Vector2):
@@ -172,6 +176,28 @@ func show():
 	_tween.start()
 	for entity in _entities:
 		entity.show()
+
+
+func update_corruption(entity):
+	if entity == GM.player:
+		var fx:CPUParticles2D = entity.get_node('CorruptionFX')
+		var tot_corruption = clamp(int(corruption) - entity.security, 0, 5)
+		match tot_corruption:
+			Corruption.NONE:
+				entity.meta['corruption'] = 0
+				fx.visible = false
+			Corruption.LOW:
+				entity.meta['corruption'] = 1
+				fx.color = Config.COLOR_LOW_CORRUPTION
+				fx.visible = true
+			Corruption.MEDIUM:
+				entity.meta['corruption'] = 2
+				fx.color = Config.COLOR_MED_CORRUPTION
+				fx.visible = true
+			Corruption.HIGH:
+				entity.meta['corruption'] = 4
+				fx.color = Config.COLOR_HIGH_CORRUPTION
+				fx.visible = true
 
 
 func _on_input_event(viewport, event, shape_idx):
