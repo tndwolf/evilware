@@ -135,7 +135,7 @@ var templates = {
 		'meta': {'bits': 4, 'description': 'Very annoying, with a tendency to slip away'},
 		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
 		'res': preload("res://Entitites/Threats/Adware.tscn"),
-		'traits': ['Annoy', 'Teleport']
+		'traits': ['Annoy', 'Teleport', 'Mob']
 	},
 	'bug': {
 		'meta': {'bits': 2, 'description': 'A software bug, ready to be squashed'},

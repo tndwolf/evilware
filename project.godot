@@ -75,7 +75,6 @@ config/icon="res://icon.png"
 [autoload]
 
 Config="*res://Core/Config.gd"
-Audio="*res://Core/Audio.gd"
 Map="*res://Core/Map.gd"
 GM="*res://Core/GameMaster.gd"
 UI="*res://Ui/Ui.gd"
