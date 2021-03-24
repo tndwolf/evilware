@@ -11,7 +11,6 @@
 [ext_resource path="res://Assets/logo.png" type="Texture" id=9]
 
 [sub_resource type="Animation" id=1]
-resource_name = "fade_to_black"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:color")
@@ -27,7 +26,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-resource_name = "fade_to_screen"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:color")

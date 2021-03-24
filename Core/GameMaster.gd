@@ -97,7 +97,7 @@ func damage(actor:Entity, target:Entity, value:int, skill:Skill=null, params:Dic
 			var dam_label = DamageLabel.instance()
 			dam_label.text = '-%d' % value
 			target.add_child(dam_label)
-			if target.integrity - value < 0:
+			if target.integrity - value <= 0:
 				params['dead'] = true
 			target.integrity -= value
 			if skill != null:
