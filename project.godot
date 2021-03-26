@@ -71,6 +71,7 @@ _global_script_class_icons={
 config/name="Evilware"
 run/main_scene="res://World/World.tscn"
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
