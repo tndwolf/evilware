@@ -71,11 +71,11 @@ _global_script_class_icons={
 config/name="Evilware"
 run/main_scene="res://World/World.tscn"
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [autoload]
 
 Config="*res://Core/Config.gd"
-Audio="*res://Core/Audio.gd"
 Map="*res://Core/Map.gd"
 GM="*res://Core/GameMaster.gd"
 UI="*res://Ui/Ui.gd"

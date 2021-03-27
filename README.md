@@ -4,7 +4,11 @@ Something sinister is afoot within the System and the Administrator entrusted yo
 
 Evilware is a classical roguelike made in Godot for the 7DRL 2021 challenge, so be prepared for a lot of dying but hopefully also some re-playable fun.
 
-The Music may not work on all browsers! If you experience stuttering please lower the volume from the options menu.
+## Notes on the Code
+
+As of today, this repo contains the Seven-day version of Evilware, the whole game was made in about 35h. As the time limit approached the code got messier (and is not documented), so keep that in mind when you browse through it: it is not indicative on how such a project should be structured.
+
+## Game Instructions
 
 Commands:
 

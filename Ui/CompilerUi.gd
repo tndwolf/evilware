@@ -3,6 +3,7 @@ extends Panel
 
 var _bits = 0
 onready var _bits_label = $VBoxContainer/HBoxContainer2/BitsLabel
+onready var _buy_btn = $VBoxContainer/HBoxContainer2/BuyButton
 var crack_list
 var _default_text = "> Pick a Skill to show its description"
 onready var _description = $VBoxContainer/DescriptionLabel
@@ -31,8 +32,24 @@ func _list_skills(category:String) -> Array:
 	return res
 
 
+func _on_skill_inspected(pressed:bool, item:String, btn:Button):
+	_buy_btn.disabled = true
+	if pressed:
+		if _last_selected:
+			_last_selected.pressed = false
+		_last_selected = btn
+		var skill = GM.get_skill(item)
+		var text = '> %s ()\n> %s\n> Cost: %d bits [TOO HIGH]' % [item, skill.description, skill.cost]
+		_description.text = text
+		_selected_skill = skill
+	else:
+		_last_selected = null
+		_selected_skill = null
+		_description.text = _default_text
+
+
 func _on_skill_toggled(pressed:bool, item:String, btn:Button):
-	Config.COLOR_FRIENDLY.to_html()
+	_buy_btn.disabled = false
 	if pressed:
 		if _last_selected:
 			_last_selected.pressed = false

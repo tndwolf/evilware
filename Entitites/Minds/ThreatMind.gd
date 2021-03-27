@@ -4,11 +4,11 @@ extends Mind
 func _find_target():
 	if crack == 'infect':
 		for cell in Map.query().burst(_entity.grid_position, 6).collect():
-			print('checking cell %s' % cell.grid_position)
+#			print('checking cell %s' % cell.grid_position)
 			for e in cell.entities():
-				print('checking entity %s' % e.name)
+#				print('checking entity %s' % e.name)
 				if e.faction == Entity.Faction.PLAYER and e != GM.player:
-					print('++++ new target found %s' % e.name)
+#					print('++++ new target found %s' % e.name)
 					return e
 		return GM.player
 	else:
@@ -24,7 +24,7 @@ func run() -> bool:
 			target = _find_target()
 	if target:
 		var path = Map.path_to(_entity.grid_position, target.grid_position)
-		print('%s to %s via %s' % [_entity.grid_position, target.grid_position, path])
+#		print('%s to %s via %s' % [_entity.grid_position, target.grid_position, path])
 		if len(path) > 1:
 			direction = (path[1] - _entity.grid_position).normalized().round()
 #		direction = (target.grid_position - _entity.grid_position).normalized().round()

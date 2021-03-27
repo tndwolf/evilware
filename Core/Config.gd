@@ -135,7 +135,7 @@ var templates = {
 		'meta': {'bits': 4, 'description': 'Very annoying, with a tendency to slip away'},
 		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
 		'res': preload("res://Entitites/Threats/Adware.tscn"),
-		'traits': ['Annoy', 'Teleport']
+		'traits': ['Annoy', 'Teleport', 'Mob']
 	},
 	'bug': {
 		'meta': {'bits': 2, 'description': 'A software bug, ready to be squashed'},
@@ -213,7 +213,7 @@ var templates = {
 	},
 	'rootkit': {
 		'integrity': 12,
-		'meta': {'bits': 12, 'description': 'The toughest malware, its damage is almost irreversible'},
+		'meta': {'bits': 8, 'description': 'The toughest malware, its damage is almost irreversible'},
 		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
 		'res': preload("res://Entitites/Threats/Rootkit.tscn"),
 		'traits': ['Corruption3']
@@ -227,14 +227,14 @@ var templates = {
 	},
 	'trojan': {
 		'integrity': 4,
-		'meta': {'bits': 8, 'description': 'The frontline of a remote attack'},
+		'meta': {'bits': 4, 'description': 'The frontline of a remote attack'},
 		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
 		'res': preload("res://Entitites/Threats/Trojan.tscn"),
 		'traits': ['Corruption2']
 	},
 	'virus': {
 		'integrity': 6,
-		'meta': {'bits': 8, 'description': 'Remove them before they infect other programs or files'},
+		'meta': {'bits': 4, 'description': 'Remove them before they infect other programs or files'},
 		'mind': preload("res://Entitites/Minds/ThreatMind.gd"),
 		'res': preload("res://Entitites/Threats/Virus.tscn"),
 		'traits': ['Virus', 'Corruption2']

@@ -2,8 +2,6 @@ extends Mind
 class_name PlayerMind
 
 
-#var _available_cracks = ['rm', 'delete', 'kill', 'killall', 'term', 'stop']
-#var _available_hacks = ['ps', 'fork', 'sleep', 'mv', 'chmod', 'defrag']
 var _available_cracks = ['rm']
 var _available_hacks = ['ps']
 var _hack_cooldown = 0
@@ -24,28 +22,6 @@ func add_skill(skill:Skill, free:bool=false):
 		if skill.overrides:
 			remove_skill(skill.overrides)
 	skill.on_purchased(_entity)
-
-
-func set_skill(skill:Skill):
-	if skill.name in _available_cracks:
-		crack = skill.name
-		var btn = UI.crack_button
-		btn.set_icon(skill.icon_frame)
-		btn.hint_tooltip = crack
-	elif skill.name in _available_hacks:
-		hack = skill.name
-		var btn = UI.hack_button
-		btn.set_icon(skill.icon_frame)
-		btn.hint_tooltip = hack
-
-
-func remove_skill(skill:String):
-	_available_cracks.erase(skill)
-	_available_hacks.erase(skill)
-	_overridden_skills.append(skill)
-	var sk = GM.get_skill(skill)
-	if sk and sk.overrides:
-		remove_skill(sk.overrides)
 
 
 func hack(coords:Vector2) -> bool:
@@ -100,6 +76,17 @@ func on_click(event:InputEventMouseButton, grid_position:Vector2):
 #	print('%s %s' % [event, grid_position])
 
 
+func remove_skill(skill:String):
+	_available_cracks.erase(skill)
+	_available_hacks.erase(skill)
+	_overridden_skills.append(skill)
+	if skill == crack:
+		set_skill(GM.get_skill(_available_cracks[0]))
+	var sk = GM.get_skill(skill)
+	if sk and sk.overrides:
+		remove_skill(sk.overrides)
+
+
 func run() -> bool:
 	if !_started:
 		on_round()
@@ -121,3 +108,17 @@ func run() -> bool:
 				res = GM.try_action('Move', _entity, {'direction': direction})
 	_started = !res
 	return res
+
+
+func set_skill(skill:Skill):
+	print('setting ' + skill.name)
+	if skill.name in _available_cracks:
+		crack = skill.name
+		var btn = UI.crack_button
+		btn.set_icon(skill.icon_frame)
+		btn.hint_tooltip = crack
+	elif skill.name in _available_hacks:
+		hack = skill.name
+		var btn = UI.hack_button
+		btn.set_icon(skill.icon_frame)
+		btn.hint_tooltip = hack

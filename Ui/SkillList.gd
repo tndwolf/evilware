@@ -45,9 +45,10 @@ func set_list(list:Array) -> Control:
 			btn.modulate = Color('#dfdfdf')
 			btn.text += ' (ready)'
 		else:
-			btn.disabled = true
+			btn.disabled = false
 			btn.modulate = Color('#dfdfdf')
 			btn.text += ' (unavailable)'
+			btn.connect("toggled", find_parent('CompilerUi'), '_on_skill_inspected', [item, btn])
 		sc.add_child(btn)
 	return self
 

@@ -16,6 +16,7 @@ var _level = {}
 var _mouse_move = false
 var _objects = []
 var player = null setget set_player, get_player
+var player_class = null
 var _skills = preload("res://Skills/Skills.tscn").instance()
 var state = State.UI_PAUSE
 var TeleportFx = preload("res://Core/TeleportInFx.tscn")
@@ -96,7 +97,7 @@ func damage(actor:Entity, target:Entity, value:int, skill:Skill=null, params:Dic
 			var dam_label = DamageLabel.instance()
 			dam_label.text = '-%d' % value
 			target.add_child(dam_label)
-			if target.integrity - value < 0:
+			if target.integrity - value <= 0:
 				params['dead'] = true
 			target.integrity -= value
 			if skill != null:
@@ -296,6 +297,10 @@ func spawn_player(coords:Vector2) -> Entity:
 	else:
 		player = spawn_at('player', coords)
 		player.self_modulate = Config.COLOR_OBJECT
+		if player_class == 'cracking':
+			player.mind.add_skill(get_skill('delete'), true)
+		elif player_class == 'hacking':
+			player.mind.add_skill(get_skill('mv'), true)
 	player.meta['name'] = 'Antivirus'
 	Map.update_fov(player.grid_position)
 	return player
